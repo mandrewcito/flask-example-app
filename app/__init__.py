@@ -1,14 +1,25 @@
-from flask import Flask
+from flask import Flask,jsonify
 
-from app.module1.controllers import MyModule as m1
-from app.module2.controllers import module2 as m2
-from app.parameter.controllers import parameter_module as parameter_module
+from app.class_module.controllers import ClassModule as ClassModule
+from app.script_module.controllers import script_module as script_module
+
+from app.errors.invalid_usage import InvalidUsage as InvalidUsage
 
 app = Flask(__name__)
 
-#app.config.from_object('config')
+# Register modules as a class instance 
+app.register_blueprint(ClassModule())
 
-#Register modules
-app.register_blueprint(m1())
-app.register_blueprint(m2)
-app.register_blueprint(parameter_module)
+# Register modules as an instantiated object
+app.register_blueprint(script_module)
+
+# Register custom errors
+@app.errorhandler(InvalidUsage)
+def handle_invalid_usage(error):
+    response = jsonify(error.to_dict())
+    response.status_code = error.status_code
+    return response
+
+@app.route('/error/custom/foo')
+def get_foo():
+    raise InvalidUsage('This view is gone', status_code=410)

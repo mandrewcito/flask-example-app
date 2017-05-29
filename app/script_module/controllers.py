@@ -3,18 +3,18 @@ Blueprint - modules, request - querystring
 """
 from flask import Blueprint,request
 
-parameter_module = Blueprint('parameter_module',__name__,url_prefix='/parameter')
+script_module = Blueprint('script_module',__name__,url_prefix='/script_module')
 
 hello = lambda x: "hello, {0}!".format(x)
 
-@parameter_module.route('/url/<name>',methods=['GET'])
+@script_module.route('/url/<name>',methods=['GET'])
 def url(name):
     """
     url: parameter/url/[a name]
     """
     return hello(name)
 
-@parameter_module.route('/query',methods=['GET'])
+@script_module.route('/query',methods=['GET'])
 def query_string():
     """
     url: parameter/query?name=[a name]
@@ -22,7 +22,7 @@ def query_string():
     name = request.args.get('name')
     return hello(name)
 
-@parameter_module.route('/body',methods=['POST'])
+@script_module.route('/body',methods=['POST'])
 def body():    
     """
     url: parameter/body
