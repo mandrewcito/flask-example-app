@@ -5,7 +5,13 @@ from app.script_module.controllers import script_module as script_module
 
 from app.errors.invalid_usage import InvalidUsage as InvalidUsage
 
+from app.responses.default import DefaultResponse
+
 app = Flask(__name__)
+
+# Default response register
+
+app.response_class = DefaultResponse
 
 # Register modules as a class instance 
 app.register_blueprint(ClassModule())
@@ -23,3 +29,5 @@ def handle_invalid_usage(error):
 @app.route('/error/custom/foo')
 def get_foo():
     raise InvalidUsage('This view is gone', status_code=410)
+
+

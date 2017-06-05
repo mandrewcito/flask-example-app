@@ -5,7 +5,7 @@ from flask import Blueprint,request
 
 script_module = Blueprint('script_module',__name__,url_prefix='/script_module')
 
-hello = lambda x: "hello, {0}!".format(x)
+hello = lambda x: {"value":"hello, {0}!".format(x)}
 
 @script_module.route('/url/<name>',methods=['GET'])
 def url(name):
