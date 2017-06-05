@@ -8,7 +8,7 @@ from app.errors.invalid_usage import InvalidUsage as InvalidUsage
 from app.responses.default import DefaultResponse
 
 class ExampleApi(Flask):
-    def __init__(self):
+    def __init__(self,configuration):
         super(ExampleApi, self).__init__(__name__)
         
         # Default response register

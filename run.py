@@ -1,3 +1,6 @@
 from app.application import ExampleApi
 
-ExampleApi().run(host="0.0.0.0",port=8080,debug=True)
+from config import Configuration
+
+cfg = Configuration(debug=True)
+ExampleApi(cfg).run(host=cfg.host,port=cfg.port,debug=cfg.debug)
