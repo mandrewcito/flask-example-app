@@ -5,5 +5,7 @@ from app.application import ExampleApi
 
 from config import Configuration
 
-cfg = Configuration(debug=True)
-ExampleApi(cfg).run(host=cfg.host,port=cfg.port,debug=cfg.debug)
+cfg = Configuration(debug=False)
+app = ExampleApi(cfg)
+if __name__ == "__main__":
+    app.run(host=cfg.host,port=cfg.port,debug=cfg.debug)
