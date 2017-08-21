@@ -1,0 +1,17 @@
+<VirtualHost *:80>
+		ServerName 172.17.0.2
+		ServerAdmin mandriltrompetero@gmail.com
+		WSGIScriptAlias / /var/www/src/flaskapp.wsgi
+		<Directory /var/www/src/>
+			Order allow,deny
+			Allow from all
+		</Directory>
+		Alias /static /var/www/src/app/static
+		<Directory /var/www/src/app/static/>
+			Order allow,deny
+			Allow from all
+		</Directory>
+		ErrorLog ${APACHE_LOG_DIR}/error.log
+		LogLevel info
+		CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
