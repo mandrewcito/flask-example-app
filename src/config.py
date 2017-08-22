@@ -4,7 +4,7 @@ class Configuration(object):
     def __init__(self,debug=False):
         section = "Flask-debug" if debug else "Flask"
         cfg = ConfigParser.ConfigParser()
-        cfg.read("/var/www/src/cfg.ini")
+        cfg.read("src/cfg.ini" if debug else "/var/www/src/cfg.ini")
         self.debug = cfg.getboolean(section, "DEBUG")
         self.csrf_enabled = cfg.getboolean(section,"CSRF_ENABLED")
         self.threads_per_page = cfg.getint(section,"THREADS_PER_PAGE")
